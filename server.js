@@ -31,10 +31,10 @@ app.post('/api/ask', async (req, res) => {
     const translatedOutput = await translateText(aiMessage, 'EN', language);
 
     res.status(200).json({ reply: translatedOutput });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Something went wrong' });
-  }
+    catch (error) {
+      console.error(error.message);
+      res.status(500).json({ error: error.message });
+    }
 });
 
 async function translateText(text, from, to) {
