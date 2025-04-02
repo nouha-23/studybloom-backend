@@ -31,10 +31,10 @@ app.post('/api/ask', async (req, res) => {
     const translatedOutput = await translateText(aiMessage, 'EN', language);
 
     res.status(200).json({ reply: translatedOutput });
-    catch (error) {
-      console.error(error.message);
-      res.status(500).json({ error: error.message });
-    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: error.message });
+  }
 });
 
 async function translateText(text, from, to) {
@@ -53,7 +53,7 @@ async function translateText(text, from, to) {
     );
     return response.data.translations[0].text;
   } catch (error) {
-    console.error('Translation Error:', error);
+    console.error('Translation Error:', error.message);
     return text;
   }
 }
